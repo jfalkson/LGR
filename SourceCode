@@ -1,0 +1,364 @@
+Sub Scorereport()
+
+Dim wb As Workbook
+Set wb = ActiveWorkbook
+
+Dim SampleSheet As Worksheet
+Set SampleSheet = wb.ActiveSheet
+
+SampleSheet.Activate
+
+Dim Count As Integer
+Dim CountNumbers As Integer
+Dim CountLogic As Integer
+Dim CountAlgebra As Integer
+Dim CountData As Integer
+
+Count = 0
+CountNumbers = 0
+CountLogic = 0
+CountAlgebra = 0
+CountData = 0
+
+Dim i As Integer
+
+''''Counting the number of correct math questions
+'Geometry
+For i = 1 To 22
+    If Cells(38, i).Value = 1 And Cells(35, i).Value = "g" Then
+        Count = Count + 1
+    End If
+    If Cells(69, i).Value = 1 And Cells(66, i).Value = "g" Then
+        Count = Count + 1
+    End If
+    If Cells(88, i).Value = 1 And Cells(85, i).Value = "g" Then
+        Count = Count + 1
+    End If
+    
+''numbers
+    If Cells(38, i).Value = 1 And Cells(35, i).Value = "n" Then
+        CountNumbers = CountNumbers + 1
+    End If
+    If Cells(69, i).Value = 1 And Cells(66, i).Value = "n" Then
+        CountNumbers = CountNumbers + 1
+    End If
+    If Cells(88, i).Value = 1 And Cells(85, i).Value = "n" Then
+        CountNumbers = CountNumbers + 1
+    End If
+
+'''''logic
+    If Cells(38, i).Value = 1 And Cells(35, i).Value = "l" Then
+        CountLogic = CountLogic + 1
+    End If
+    If Cells(69, i).Value = 1 And Cells(66, i).Value = "l" Then
+        CountLogic = CountLogic + 1
+    End If
+    If Cells(88, i).Value = 1 And Cells(85, i).Value = "l" Then
+        CountLogic = CountLogic + 1
+    End If
+
+
+
+'''''algebra
+    If Cells(38, i).Value = 1 And Cells(35, i).Value = "a" Then
+        CountAlgebra = CountAlgebra + 1
+    End If
+    If Cells(69, i).Value = 1 And Cells(66, i).Value = "a" Then
+        CountAlgebra = CountAlgebra + 1
+    End If
+    If Cells(88, i).Value = 1 And Cells(85, i).Value = "a" Then
+        CountAlgebra = CountAlgebra + 1
+    End If
+
+
+'''''data
+    If Cells(38, i).Value = 1 And Cells(35, i).Value = "d" Then
+        CountData = CountData + 1
+    End If
+    If Cells(69, i).Value = 1 And Cells(66, i).Value = "d" Then
+        CountData = CountData + 1
+    End If
+    If Cells(88, i).Value = 1 And Cells(85, i).Value = "d" Then
+        CountData = CountData + 1
+    End If
+Next i
+
+''''inputting the number of correct math questions
+Range("D14").Value = Count
+Range("D15").Value = CountNumbers
+Range("D16").Value = CountLogic
+Range("D17").Value = CountAlgebra
+Range("D18").Value = CountData
+
+'''''Counting number of incorrect math question
+'''''Adjusted 7/15/2012 to count incorrect grid-ins to improve accuracy
+Dim ICountGeometry As Integer
+Dim ICountAlgebra As Integer
+Dim ICountNumbers As Integer
+Dim ICountLogic As Integer
+Dim ICountData As Integer
+
+ICountGeometry = 0
+ICountAlgebra = 0
+ICountNumbers = 0
+ICountLogic = 0
+ICountData = 0
+
+Dim k As Integer
+
+For k = 1 To 22
+    If Cells(38, k).Value = -0.25 And Cells(35, k).Value = "g" Then
+        ICountGeometry = ICountGeometry + 1
+    End If
+    If (Cells(69, k).Value = -0.25 Or Cells(69, k).Value = "inc") And Cells(66, k).Value = "g" Then
+        ICountGeometry = ICountGeometry + 1
+    End If
+    If Cells(88, k).Value = -0.25 And Cells(85, k).Value = "g" Then
+        ICountGeometry = ICountGeometry + 1
+    End If
+    
+''numbers
+    If Cells(38, k).Value = -0.25 And Cells(35, k).Value = "n" Then
+        ICountNumbers = ICountNumbers + 1
+    End If
+    If (Cells(69, k).Value = -0.25 Or Cells(69, k).Value = "inc") And Cells(66, k).Value = "n" Then
+        ICountNumbers = ICountNumbers + 1
+    End If
+    If Cells(88, k).Value = -0.25 And Cells(85, k).Value = "n" Then
+        ICountNumbers = ICountNumbers + 1
+    End If
+
+'''''logic
+    If Cells(38, k).Value = -0.25 And Cells(35, k).Value = "l" Then
+        ICountLogic = ICountLogic + 1
+    End If
+    If (Cells(69, k).Value = -0.25 Or Cells(69, k).Value = "inc") And Cells(66, k).Value = "l" Then
+        ICountLogic = ICountLogic + 1
+    End If
+    If Cells(88, k).Value = -0.25 And Cells(85, k).Value = "l" Then
+        ICountLogic = ICountLogic + 1
+    End If
+
+
+
+'''''algebra
+    If Cells(38, k).Value = -0.25 And Cells(35, k).Value = "a" Then
+        ICountAlgebra = ICountAlgebra + 1
+    End If
+    If (Cells(69, k).Value = -0.25 Or Cells(69, k).Value = "inc") And Cells(66, k).Value = "a" Then
+        ICountAlgebra = ICountAlgebra + 1
+    End If
+    If Cells(88, k).Value = -0.25 And Cells(85, k).Value = "a" Then
+        ICountAlgebra = ICountAlgebra + 1
+    End If
+
+
+'''''data
+    If Cells(38, k).Value = -0.25 And Cells(35, k).Value = "d" Then
+        ICountData = ICountData + 1
+    End If
+    If (Cells(69, k).Value = -0.25 Or Cells(69, k).Value = "inc") And Cells(66, k).Value = "d" Then
+        ICountData = ICountData + 1
+    End If
+    If Cells(88, k).Value = -0.25 And Cells(85, k).Value = "d" Then
+        ICountData = ICountData + 1
+    End If
+Next k
+
+Range("F14").Value = ICountGeometry
+Range("F15").Value = ICountNumbers
+Range("F16").Value = ICountLogic
+Range("F17").Value = ICountAlgebra
+Range("F18").Value = ICountData
+
+
+'''''Counting the number of correct Critical Reading Questions
+Dim Countsc As Integer
+Dim Countpb As Integer
+Countsc = 0
+Countpb = 0
+
+Dim ICountsc As Integer
+Dim ICountpb As Integer
+ICountsc = 0
+ICountpb = 0
+
+Dim j As Integer
+For j = 1 To 22
+    If Cells(45, j).Value = 1 And Cells(42, j).Value = "sc" Then
+        Countsc = Countsc + 1
+    End If
+    If Cells(50, j).Value = 1 And Cells(47, j).Value = "sc" Then
+        Countsc = Countsc + 1
+    End If
+    
+    If Cells(76, j).Value = 1 And Cells(73, j).Value = "sc" Then
+        Countsc = Countsc + 1
+    End If
+    If Cells(81, j).Value = 1 And Cells(78, j).Value = "sc" Then
+        Countsc = Countsc + 1
+    End If
+    If Cells(95, j).Value = 1 And Cells(92, j).Value = "sc" Then
+        Countsc = Countsc + 1
+    End If
+    
+    
+    
+    
+    If Cells(45, j).Value = 1 And Cells(42, j).Value = "pb" Then
+        Countpb = Countpb + 1
+    End If
+    If Cells(50, j).Value = 1 And Cells(47, j).Value = "pb" Then
+        Countpb = Countpb + 1
+    End If
+    
+    If Cells(76, j).Value = 1 And Cells(73, j).Value = "pb" Then
+        Countpb = Countpb + 1
+    End If
+    If Cells(81, j).Value = 1 And Cells(78, j).Value = "pb" Then
+        Countpb = Countpb + 1
+    End If
+    If Cells(95, j).Value = 1 And Cells(92, j).Value = "pb" Then
+        Countpb = Countpb + 1
+    End If
+    
+   Range("Q14").Value = Countsc
+   Range("Q15").Value = Countpb
+    
+''''now we count the incorrect reading questions
+
+
+    If Cells(45, j).Value = -0.25 And Cells(42, j).Value = "sc" Then
+        ICountsc = ICountsc + 1
+    End If
+    If Cells(50, j).Value = -0.25 And Cells(47, j).Value = "sc" Then
+        ICountsc = ICountsc + 1
+    End If
+    
+    If Cells(76, j).Value = -0.25 And Cells(73, j).Value = "sc" Then
+        ICountsc = ICountsc + 1
+    End If
+    If Cells(81, j).Value = -0.25 And Cells(78, j).Value = "sc" Then
+        ICountsc = ICountsc + 1
+    End If
+    If Cells(95, j).Value = -0.25 And Cells(92, j).Value = "sc" Then
+        ICountsc = ICountsc + 1
+    End If
+    
+    
+    
+    
+    If Cells(45, j).Value = -0.25 And Cells(42, j).Value = "pb" Then
+        ICountpb = ICountpb + 1
+    End If
+    If Cells(50, j).Value = -0.25 And Cells(47, j).Value = "pb" Then
+        ICountpb = ICountpb + 1
+    End If
+    
+    If Cells(76, j).Value = -0.25 And Cells(73, j).Value = "pb" Then
+        ICountpb = ICountpb + 1
+    End If
+    If Cells(81, j).Value = -0.25 And Cells(78, j).Value = "pb" Then
+        ICountpb = ICountpb + 1
+    End If
+    If Cells(95, j).Value = -0.25 And Cells(92, j).Value = "pb" Then
+        ICountpb = ICountpb + 1
+    End If
+Next j
+    
+Range("S14").Value = ICountsc
+Range("S15").Value = ICountpb
+
+        
+
+
+
+''''''Counting the number of correct Writing Questions
+
+Dim Countis As Integer
+Dim Countip As Integer
+Dim Countise As Integer
+
+Countis = 0
+Countip = 0
+Countise = 0
+
+Dim ICountis As Integer
+Dim ICountip As Integer
+Dim ICountise As Integer
+
+ICountis = 0
+ICountip = 0
+ICountise = 0
+
+
+
+Dim t As Integer
+For t = 1 To 22
+    If Cells(57, t).Value = 1 And Cells(54, t).Value = "is" Then
+        Countis = Countis + 1
+    End If
+        If Cells(62, t).Value = 1 And Cells(59, t).Value = "is" Then
+        Countis = Countis + 1
+    End If
+   
+       If Cells(57, t).Value = 1 And Cells(54, t).Value = "ip" Then
+        Countip = Countip + 1
+    End If
+        If Cells(62, t).Value = 1 And Cells(59, t).Value = "ip" Then
+        Countip = Countip + 1
+    End If
+
+    If Cells(57, t).Value = 1 And Cells(54, t).Value = "ise" Then
+        Countise = Countise + 1
+    End If
+        If Cells(62, t).Value = 1 And Cells(59, t).Value = "ise" Then
+        Countise = Countise + 1
+    End If
+
+    
+    If Cells(102, t).Value = 1 And Cells(99, t).Value = "is" Then
+        Countis = Countis + 1
+    End If
+    
+    
+    
+    
+    '''''''''''''''''''now the incorrect writing questions
+        If Cells(57, t).Value = -0.25 And Cells(54, t).Value = "is" Then
+        ICountis = ICountis + 1
+    End If
+        If Cells(62, t).Value = -0.25 And Cells(59, t).Value = "is" Then
+        ICountis = ICountis + 1
+    End If
+   
+       If Cells(57, t).Value = -0.25 And Cells(54, t).Value = "ip" Then
+        ICountip = ICountip + 1
+    End If
+        If Cells(62, t).Value = -0.25 And Cells(59, t).Value = "ip" Then
+        ICountip = ICountip + 1
+    End If
+
+    If Cells(57, t).Value = -0.25 And Cells(54, t).Value = "ise" Then
+        ICountise = ICountise + 1
+    End If
+        If Cells(62, t).Value = -0.25 And Cells(59, t).Value = "ise" Then
+        ICountise = ICountise + 1
+    End If
+    
+    If Cells(102, t).Value = -0.25 And Cells(99, t).Value = "is" Then
+        ICountis = ICountis + 1
+    End If
+    
+    
+    Next t
+  Range("N23").Value = Countis
+  Range("N24").Value = Countip
+  Range("N25").Value = Countise
+  
+  Range("P23").Value = ICountis
+  Range("P24").Value = ICountip
+  Range("P25").Value = ICountise
+
+End Sub
+
